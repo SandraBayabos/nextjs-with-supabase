@@ -14,21 +14,4 @@ function calculateCellPosition(
   return [row, col];
 }
 
-function splitArray(arr: string[], length: number) {
-  let result = [];
-  for (let i = 0; i < arr.length; i += length) {
-    result.push(arr.slice(i, i + length));
-  }
-  return result;
-}
-
-function coordinateToIndex(coordinate: [number, number], rowLength: number) {
-  const [row, col] = coordinate;
-  if (row < 0 || col < 0 || row >= rowLength || col >= rowLength) {
-    // Handle invalid coordinates (out of bounds)
-    return -1;
-  }
-  return row * rowLength + col;
-}
-
-export { splitArray, coordinateToIndex, calculateCellPosition };
+export { calculateCellPosition };
