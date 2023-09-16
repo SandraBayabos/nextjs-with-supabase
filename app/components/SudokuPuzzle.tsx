@@ -3,8 +3,6 @@
 import React, { useState, useRef } from "react";
 import { FC } from "react";
 import {
-  splitArray,
-  coordinateToIndex,
   calculateCellPosition,
 } from "../helpers/matrix";
 
@@ -64,7 +62,6 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
                       : getCellValue(boxIndex, cellIndex)
                   }
                   readOnly={!isEditable(boxIndex, cellIndex)}
-                  // readOnly={getCellValue(boxIndex, cellIndex) !== "."}
                   onChange={(e) => {
                     const [row, col] = calculateCellPosition(
                       boxIndex,
