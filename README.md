@@ -1,10 +1,10 @@
-# Supabase Web Application with NextJS, TailwindCSS and Supabase
+# Sudoku Game Web Application with NextJS, TailwindCSS and Supabase
 
 A dynamic web application for Sudoku, built using Next.js. The application fetches random Sudoku puzzles from a Supabase database and provides features for users to solve, validate, and get solutions.
 [View & Play Live Game Here](https://nextjs-with-supabase-liard-seven.vercel.app/)
 
-![Sudoku Image](/screenshots/sudokuweb.png)
-![Sudoku Image](/screenshots/sudokumobile.png)
+<img src="/screenshots/sudokuweb.png" alt="Sudoku Board" width="400"/>
+<img src="/screenshots/sudokumobile.png" alt="Sudoku Board" width="400"/>
 
 ## Features
 
