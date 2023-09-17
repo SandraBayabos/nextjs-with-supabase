@@ -60,7 +60,7 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
 
   const GameStateDisplay = () => {
     const loadNewPuzzle = () => {
-      window.location.reload(); // hehehe :)
+      window.location.reload();
     };
     const continuePuzzle = () => {
       setGameState(GAME_STATE.PLAYING);
