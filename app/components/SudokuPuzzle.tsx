@@ -4,6 +4,7 @@ import { FC, useRef, useState } from "react";
 import { checkSudoku, getFlattenIndex } from "../helpers/matrix";
 import InputButtons from "./InputButtons";
 import Confetti from "./Confetti";
+import Button from "./Button";
 
 enum GAME_STATE {
   PLAYING,
@@ -59,7 +60,7 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
 
   const GameStateDisplay = () => {
     const loadNewPuzzle = () => {
-      window.location.reload();
+      window.location.reload(); // hehehe :)
     };
     const continuePuzzle = () => {
       setGameState(GAME_STATE.PLAYING);
@@ -85,18 +86,18 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
             <div className="text-4xl font-black text-red-400 tracking-wide">
               Oops! That's not right...
             </div>
-            <button
-              className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 mx-5 w-32"
+            <Button
+              className="py-2 px-3 mx-5 w-32"
               onClick={continuePuzzle}
             >
               Continue
-            </button>
-            <button
-              className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 mx-3 w-32"
+            </Button>
+            <Button
+              className="py-2 px-3 mx-3 w-32"
               onClick={loadNewPuzzle}
             >
               I Give Up
-            </button>
+            </Button>
           </div>
         </>
       ),
@@ -175,24 +176,15 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
           />
         </div>
         <div className="flex justify-between pt-8 gap-2">
-          <button className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full">
-            Load New Puzzle
-          </button>
-          <button
-            className={`btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full ${
-              isFilled ? "" : "opacity-50 cursor-not-allowed"
-            }`}
+          <Button>Load New Puzzle</Button>
+          <Button
+            className={isFilled ? "" : "opacity-50 cursor-not-allowed"}
             onClick={validatePuzzle}
             disabled={!isFilled}
           >
             Check
-          </button>
-          <button
-            className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full"
-            onClick={solveForMe}
-          >
-            Solve For Me
-          </button>
+          </Button>
+          <Button onClick={solveForMe}>Solve For Me</Button>
         </div>
       </div>
     </>
