@@ -21,3 +21,9 @@ A dynamic web application for Sudoku, built using Next.js. The application fetch
 - `npm install`
 - Rename `.env.local.example` to `.env.local` and update the values for `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` from [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
 - Run `npm run dev` to start the local development server
+
+## Future Enhancements
+- Adding a timer onload so users can gauge their time to complete a puzzle
+- Adding in more tests for SudokuPuzzle.tsx and solver logic
+- Implement difficulty level rating by number of cells to fill in
+- Use a better way to reload the game - perhaps implement `useEffect` in page.tsx inside which to make an API call to Supabase to load a random game each time, rather than calling all puzzles
