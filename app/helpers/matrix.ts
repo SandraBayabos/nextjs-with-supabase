@@ -1,3 +1,5 @@
+// Input: [0,3]
+// Output: [1,0]
 function calculateCellPosition(
   boxIndex: number,
   cellIndex: number
@@ -14,14 +16,12 @@ function calculateCellPosition(
   return [row, col];
 }
 
-// Convert 1D array to 2D array with 9 elements in each row
-function createMatrix(arr: number[]): number[][] {
-  const matrix: number[][] = [];
-  for (let i = 0; i < arr.length; i += 9) {
-    matrix.push(arr.slice(i, i + 9));
-  }
-  return matrix;
-}
+// Input: [1,0]
+// Output: 9
+const getFlattenIndex = (boxIndex: number, cellIndex: number): number => {
+  const [row, col] = calculateCellPosition(boxIndex, cellIndex);
+  return row * 9 + col;
+};
 
 // Replace all "." cells with null
 function parseEmptyCells(input: string[]) {
@@ -50,26 +50,67 @@ function isValid(
 }
 
 // Sudoku solver
-function solveSudoku(input: string[]): (number | null)[] {
+function solveSudoku(input: string[]): string[] {
   // Convert all "." cells to null
   const board = parseEmptyCells(input);
 
   function backtrack(cell = 0) {
     if (cell === 81) return true;
-    if (board[cell] !== null) return backtrack(cell + 1); // Skip filled cells
-
+    if (board[cell] !== null) return backtrack(cell + 1);
     for (let num = 1; num <= 9; num++) {
       if (isValid(board, Math.floor(cell / 9), cell % 9, num)) {
         board[cell] = num;
-        if (backtrack(cell + 1)) return true; // Move to the next cell
-        board[cell] = null; // Reset the current cell (backtrack)
+        if (backtrack(cell + 1)) return true;
+        board[cell] = null;
       }
     }
-    return false; // No valid numbers can be placed in this cell
+    return false;
   }
 
   backtrack();
-  return board;
+  return board.map((cell) => (cell === null ? "." : cell.toString()));
 }
 
-export { calculateCellPosition, createMatrix, parseEmptyCells, solveSudoku };
+function checkSudoku(question: string[], attempt: string[]): boolean {
+  function isValid(
+    board: string[],
+    row: number,
+    col: number,
+    num: string
+  ): boolean {
+    for (let x = 0; x < 9; x++) {
+      const i = Math.floor(row / 3) * 3 + Math.floor(x / 3);
+      const j = Math.floor(col / 3) * 3 + (x % 3);
+      if (
+        (board[row * 9 + x] === num && x !== col) ||
+        (board[x * 9 + col] === num && x !== row) ||
+        (board[i * 9 + j] === num && i !== row && j !== col)
+      ) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  for (let i = 0; i < 81; i++) {
+    if (question[i] !== "." && question[i] !== attempt[i]) {
+      return false;
+    }
+
+    if (
+      question[i] === "." &&
+      !isValid(attempt, Math.floor(i / 9), i % 9, attempt[i])
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export {
+  calculateCellPosition,
+  getFlattenIndex,
+  parseEmptyCells,
+  solveSudoku,
+  checkSudoku,
+};
