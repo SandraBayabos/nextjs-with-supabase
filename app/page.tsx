@@ -1,11 +1,6 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import SudokuPuzzle from "./components/SudokuPuzzle";
-
-interface puzzleData {
-  id: number;
-  puzzle: string[][];
-  created_at: string;
-}
+import { solveSudoku } from "./helpers/matrix";
 
 export default async function Home() {
   const supabase = createClientComponentClient();
@@ -16,10 +11,12 @@ export default async function Home() {
   if (data) {
     const randomIndex = Math.floor(Math.random() * data.length);
     selectedPuzzle = data[randomIndex].puzzle;
+    const solvedPuzzleArray = solveSudoku(selectedPuzzle.split(""));
+    const solvedPuzzle = solvedPuzzleArray.map(cell => cell === null ? "." : cell.toString());
 
     return (
       <div className="w-full flex flex-col items-center">
-        <SudokuPuzzle selectedPuzzle={selectedPuzzle} />
+        <SudokuPuzzle selectedPuzzle={selectedPuzzle} puzzleSolution={solvedPuzzle} />
       </div>
     );
   } else if (error) {
