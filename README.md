@@ -26,4 +26,3 @@ A dynamic web application for Sudoku, built using Next.js. The application fetch
 - Adding a timer onload so users can gauge their time to complete a puzzle
 - Adding in more tests for SudokuPuzzle.tsx and solver logic
 - Implement difficulty level rating by number of cells to fill in
-- Use a better way to reload the game - perhaps implement `useEffect` in page.tsx inside which to make an API call to Supabase to load a random game each time, rather than calling all puzzles
