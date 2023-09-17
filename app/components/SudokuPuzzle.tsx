@@ -76,7 +76,7 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
         <>
           <Confetti />
           <div className="text-4xl font-black text-red-400 tracking-wide">
-            YOU WON!
+            You solved it!
           </div>
         </>
       ),
@@ -169,7 +169,9 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
             Load New Puzzle
           </Button>
           <Button
-            className={`isFilled ? "" : "opacity-50 cursor-not-allowed" w-full`}
+            className={
+              isFilled ? "w-full" : "opacity-50 cursor-not-allowed w-full"
+            }
             onClick={validatePuzzle}
             disabled={!isFilled}
           >
