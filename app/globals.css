@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    background-color: rgba(226, 242, 255, 1);
+  }
+
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
