@@ -51,7 +51,6 @@ function isValid(
 
 // Sudoku solver
 function solveSudoku(input: string[]): string[] {
-  // Convert all "." cells to null
   const board = parseEmptyCells(input);
 
   function backtrack(cell = 0) {
