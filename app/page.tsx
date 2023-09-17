@@ -1,35 +1,25 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import SudokuPuzzle from "./components/SudokuPuzzle";
-import { solveSudoku } from "./helpers/matrix";
+import { fetchPuzzle } from "./helpers/fetchPuzzle";
 
+// Do not cache supabase data response
 export const revalidate = 0;
 
 export default async function Home() {
-  const supabase = createClientComponentClient();
+  const selectedPuzzle = await fetchPuzzle();
 
-  const { data, error } = await supabase.from("sudoku_puzzles").select();
-  let selectedPuzzle: string = "";
-
-  if (data) {
-    const randomIndex = Math.floor(Math.random() * data.length);
-    selectedPuzzle = data[randomIndex].puzzle;
-    const solvedPuzzle = solveSudoku(selectedPuzzle.split(""));
-
-    return (
-      <div className="w-full flex flex-col items-center">
-        <SudokuPuzzle
-          selectedPuzzle={selectedPuzzle}
-          puzzleSolution={solvedPuzzle}
-        />
-      </div>
-    );
-  } else if (error) {
+  if (!selectedPuzzle) {
     return (
       <div className="w-full flex flex-col items-center relative">
         <h1>
-          Error: {error.message} Please contact the administrator for help.
+          Unable to fetch puzzle. Please try again later or contact support.
         </h1>
       </div>
     );
   }
+
+  return (
+    <div className="w-full flex flex-col items-center">
+      <SudokuPuzzle selectedPuzzle={selectedPuzzle} />
+    </div>
+  );
 }
