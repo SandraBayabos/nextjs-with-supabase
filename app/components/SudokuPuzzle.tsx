@@ -26,7 +26,7 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
   const [gameState, setGameState] = useState(GAME_STATE.PLAYING);
 
   const initialPuzzle = useRef<string[]>(props.selectedPuzzle.split(""));
-  
+
   const isFilled = puzzle.every((cell) => cell !== ".");
 
   const getCellValue = (boxIndex: number, cellIndex: number): string => {
@@ -53,10 +53,13 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
     }
   }
 
+  const solveForMe = () => {
+    setPuzzle(props.puzzleSolution);
+  };
+
   const GameStateDisplay = () => {
     const loadNewPuzzle = () => {
       window.location.reload();
-      // setGameState(GAME_STATE.PLAYING);
     };
     const continuePuzzle = () => {
       setGameState(GAME_STATE.PLAYING);
@@ -78,30 +81,39 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
       ),
       [GAME_STATE.LOST]: (
         <>
-          <div className="text-4xl font-black text-red-400 tracking-wide">
-            YOU LOST!
+          <div className="text-center fixed inset-0 bg-slate-700/80 gap-4 flex flex-col items-center justify-center flex-between">
+            <div className="text-4xl font-black text-red-400 tracking-wide">
+              Oops! That's not right...
+            </div>
+            <button
+              className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 mx-5 w-32"
+              onClick={continuePuzzle}
+            >
+              Continue
+            </button>
+            <button
+              className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 mx-3 w-32"
+              onClick={loadNewPuzzle}
+            >
+              I Give Up
+            </button>
           </div>
-          <button onClick={continuePuzzle}>Continue</button>
-          <button onClick={loadNewPuzzle}>I Give Up..</button>
         </>
       ),
     };
     return (
       <>
-        <div className="flex flex-col">{gameStateSwitch[gameState]}</div>
+        <div className="flex flex-col justify-center">
+          {gameStateSwitch[gameState]}
+        </div>
       </>
     );
-  };
-
-
-  const solveForMe = () => {
-    setPuzzle(props.puzzleSolution);
   };
 
   return (
     <>
       <GameStateDisplay />
-      <div className="sudoku-board p-2 w-6/12 max-w-xl">
+      <div className="sudoku-board p-2 w-11/12 w-md-6/12 max-w-xl">
         <div className="grid grid-cols-[1fr_35px] items-center gap-4">
           <div>
             <div className="flex justify-between">
@@ -162,20 +174,21 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
             setPuzzle={setPuzzle}
           />
         </div>
-        <div className="flex justify-between pt-8">
-          <button className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3">
+        <div className="flex justify-between pt-8 gap-2">
+          <button className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full">
             Load New Puzzle
           </button>
           <button
-            className={`btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 ${
+            className={`btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full ${
               isFilled ? "" : "opacity-50 cursor-not-allowed"
             }`}
             onClick={validatePuzzle}
+            disabled={!isFilled}
           >
             Check
           </button>
           <button
-            className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3"
+            className="btn text-slate-100 bg-gradient-to-tr from-sky-300 to-sky-500 rounded-md py-2 px-3 w-full"
             onClick={solveForMe}
           >
             Solve For Me

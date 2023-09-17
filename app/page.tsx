@@ -16,19 +16,11 @@ export default async function Home() {
     return (
       <div className="w-full flex flex-col items-center">
         <SudokuPuzzle selectedPuzzle={selectedPuzzle} puzzleSolution={solvedPuzzle} />
-        {/* <SudokuPuzzle
-          selectedPuzzle={
-            "..3456789456789123789123456214365897365897214897214365531642978642978531978531642"
-          }
-          puzzleSolution={
-            "123456789456789123789123456214365897365897214897214365531642978642978531978531642".split('')
-          }
-        /> */}
       </div>
     );
   } else if (error) {
     return (
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center relative">
         <h1>
           Error: {error.message} Please contact the administrator for help.
         </h1>
