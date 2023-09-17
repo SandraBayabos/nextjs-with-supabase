@@ -86,16 +86,10 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
             <div className="text-4xl font-black text-red-400 tracking-wide">
               Oops! That's not right...
             </div>
-            <Button
-              className="py-2 px-3 mx-5 w-32"
-              onClick={continuePuzzle}
-            >
+            <Button className="py-2 px-3 mx-5 w-32" onClick={continuePuzzle}>
               Continue
             </Button>
-            <Button
-              className="py-2 px-3 mx-3 w-32"
-              onClick={loadNewPuzzle}
-            >
+            <Button className="py-2 px-3 mx-3 w-32" onClick={loadNewPuzzle}>
               I Give Up
             </Button>
           </div>
@@ -117,11 +111,6 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
       <div className="sudoku-board p-2 w-11/12 w-md-6/12 max-w-xl">
         <div className="grid grid-cols-[1fr_35px] items-center gap-4">
           <div>
-            <div className="flex justify-between">
-              <div>
-                <h2>Timer</h2>
-              </div>
-            </div>
             <div className="grid grid-cols-[1fr_1fr_1fr] grid-rows-[1fr_1fr_1fr]">
               {Array.from({ length: 9 }).map((_, boxIndex) => (
                 <div
@@ -176,15 +165,19 @@ const SudokuPuzzle: FC<SudokuPuzzleProps> = (props) => {
           />
         </div>
         <div className="flex justify-between pt-8 gap-2">
-          <Button>Load New Puzzle</Button>
+          <Button className="w-full" onClick={() => window.location.reload()}>
+            Load New Puzzle
+          </Button>
           <Button
-            className={isFilled ? "" : "opacity-50 cursor-not-allowed"}
+            className={`isFilled ? "" : "opacity-50 cursor-not-allowed" w-full`}
             onClick={validatePuzzle}
             disabled={!isFilled}
           >
             Check
           </Button>
-          <Button onClick={solveForMe}>Solve For Me</Button>
+          <Button className="w-full" onClick={solveForMe}>
+            Solve For Me
+          </Button>
         </div>
       </div>
     </>
