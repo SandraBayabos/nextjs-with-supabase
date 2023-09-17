@@ -2,6 +2,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import SudokuPuzzle from "./components/SudokuPuzzle";
 import { solveSudoku } from "./helpers/matrix";
 
+export const revalidate = 0;
+
 export default async function Home() {
   const supabase = createClientComponentClient();
 
@@ -15,7 +17,10 @@ export default async function Home() {
 
     return (
       <div className="w-full flex flex-col items-center">
-        <SudokuPuzzle selectedPuzzle={selectedPuzzle} puzzleSolution={solvedPuzzle} />
+        <SudokuPuzzle
+          selectedPuzzle={selectedPuzzle}
+          puzzleSolution={solvedPuzzle}
+        />
       </div>
     );
   } else if (error) {
