@@ -3,8 +3,8 @@
 A dynamic web application for Sudoku, built using Next.js. The application fetches random Sudoku puzzles from a Supabase database and provides features for users to solve, validate, and get solutions.
 [View & Play Live Game Here](https://nextjs-with-supabase-liard-seven.vercel.app/)
 
-![](sudokuweb.png)
-![](sudokumobile.png)
+![Sudoku Image](/screenshots/sudokuweb.png)
+![Sudoku Image](/screenshots/sudokumobile.png)
 
 ## Features
 
